@@ -9,17 +9,13 @@ import json
 import numpy as np
 
 
-#def json_convert(grid):
-#    """Open json file input and return numpy array"""
-#   d = json.load (open(grid))
-#   return d
-
 def solve(grid):
     """Call solve() function """
     
     #Open the json file passed into the solve function
     d1 = json.load (open(grid))
-
+    
+    #Work out the shape and size of the input dictionary
     tmpd1 = {k: len(v) for k,v in d1.items()}
     lengths1 = [lengthv for lengthv in tmpd1.values()]
     
@@ -31,26 +27,30 @@ def solve(grid):
             if y>=5:
                 output_grid2.extend(d1['train'][x]['input'][y])
             else:
+                #mirror the bottom half of the grid to the top half
+                #of the output grid
                 output_grid2.extend((d1['train'][x]['input'][-y+9]))
             print(np.asarray(output_grid2))
         print(" ")    
 
     """Print the Output Grids for Evaluation inputs"""
-    
     for x in range(lengths1[1]):
         for y in reversed(range(len(d1['test'][0]['input']))):
             output_grid2 = []
             if y>=5:
                 output_grid2.extend(d1['test'][x]['input'][y])
             else:
+                #mirror the bottom half of the input grid to the top half
+                #of the output grid
                 output_grid2.extend((d1['test'][x]['input'][-y+9]))
             print(np.asarray(output_grid2))
         print(" ")
 
 """main function will call the solve function and pass in the json"""
 def main():
-    """Call solve() function and pass the json"""
-    #Read the first command-line argument as the input file
+    """Call solve() function and pass the json
+    Read the first command-line argument (after python script) 
+    as the input file"""
     input_grid = sys.argv[1]
     solve(input_grid)         #pass the input file to the solve function
     
