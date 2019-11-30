@@ -10,13 +10,12 @@ import sys
 import json
 import numpy as np
 
-
+"""The solve() function takes an input file and returns a printed solution"""
 def solve(grid):
-    """Call solve() function """
-    
     #Open the json file passed into the solve function
     d = json.load (open(grid))
 
+    #Work out the shape and size of the input dictionary
     tmpd = {k: len(v) for k,v in d.items()}
     lengths = [lengthv for lengthv in tmpd.values()]
     
@@ -52,8 +51,9 @@ def solve(grid):
 
 """main function will call the solve function and pass in the json"""
 def main():
-    """Call solve() function and pass the json"""
-    #Read the first command-line argument as the input file
+    """Call solve() function and pass the json
+    Read the first command-line argument (after python script) 
+    as the input file"""
     input_grid = sys.argv[1]
     solve(input_grid)         #pass the input file to the solve function
     

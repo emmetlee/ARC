@@ -4,8 +4,9 @@ Created on Wed Nov 27 23:26:33 2019
 
 @author: emmetlee
 """
-
+import sys
 import json
+import numpy as np
 
 
 #def json_convert(grid):
@@ -31,7 +32,7 @@ def solve(grid):
                 output_grid2.extend(d1['train'][x]['input'][y])
             else:
                 output_grid2.extend((d1['train'][x]['input'][-y+9]))
-            print(output_grid2)
+            print(np.asarray(output_grid2))
         print(" ")    
 
     """Print the Output Grids for Evaluation inputs"""
@@ -43,12 +44,16 @@ def solve(grid):
                 output_grid2.extend(d1['test'][x]['input'][y])
             else:
                 output_grid2.extend((d1['test'][x]['input'][-y+9]))
-            print(output_grid2)
+            print(np.asarray(output_grid2))
         print(" ")
 
+"""main function will call the solve function and pass in the json"""
 def main():
     """Call solve() function and pass the json"""
-    output = solve("f25ffba3.json")
+    #Read the first command-line argument as the input file
+    input_grid = sys.argv[1]
+    solve(input_grid)         #pass the input file to the solve function
     
     
-main()
+if __name__ == "__main__":
+   main()
