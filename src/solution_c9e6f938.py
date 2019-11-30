@@ -6,14 +6,10 @@ Created on Tue Nov 19 15:12:08 2019
 StudentID = 19240024
 PTAI Assignment3
 """
-
+import sys
 import json
+import numpy as np
 
-
-#def json_convert(grid):
-#    """Open json file input and return numpy array"""
-#   d = json.load (open(grid))
-#   return d
 
 def solve(grid):
     """Call solve() function """
@@ -28,30 +24,39 @@ def solve(grid):
     
     for i in range(lengths[1]):
         for j in range(len(d['train'][0]['input'][i])):
-            output_grid1 = []
+            #Create a new grid to input the solution to
+            #extend the input grid to create a larger output grid footprint
+            output_grid1 = []           
             output_grid1.extend(d['train'][i]['input'][j])
+            
+            #iterate through the input grid and output to the solution grid
             for z in range(len(output_grid1)):
                 output_grid1.append(output_grid1[2-z])
-            print(output_grid1)
-        print(" ")    
+            #print as a numpy 2D array, rather than list
+            print(np.asarray(output_grid1)) 
+        print(" ")        #Add a blank line between output grids
 
     """Print the Output Grids for Evaluation inputs"""
     
     for i in range(lengths[0]):
         for j in range(len(d['test'][0]['input'][i])):
+            #Create a new grid to input the solution to
             output_grid2 = []
             output_grid2.extend(d['test'][i]['input'][j])
+            
+            #iterate through the input grid and output to the solution grid
             for z in range(len(output_grid2)):
                 output_grid2.append(output_grid2[2-z])
-            print(output_grid2)
-    
-    #return(output_grid2)
+            #print as a numpy 2D array, rather than list
+            print(np.asarray(output_grid2))
 
-
+"""main function will call the solve function and pass in the json"""
 def main():
     """Call solve() function and pass the json"""
-    output = solve("c9e6f938.json")
+    #Read the first command-line argument as the input file
+    input_grid = sys.argv[1]
+    solve(input_grid)         #pass the input file to the solve function
     
     
-  
-main()
+if __name__ == "__main__":
+   main()
