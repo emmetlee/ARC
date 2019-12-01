@@ -1,3 +1,7 @@
+# Programming and Tools for AI: Assignment 3
+The Abstraction and Reasoning Corpus(ARC) is decribed below. For the purpose of this assignment, students are asked to choose any 3 tasks from the ARC training directory, and write a hand-coded solution for each task, in the form of a python program. 
+Each task can be run from the command line and the selected json file is passed as an input argument. The output will be printed to the screen and will consist of an output grid containing the solution for each training and evaluation pair.
+
 # The Abstraction and Reasoning Corpus (ARC)
 
 This repository contains the ARC task data, as well as a browser-based interface for humans to try their hand at solving the tasks manually.
