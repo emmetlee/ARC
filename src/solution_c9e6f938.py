@@ -23,12 +23,12 @@ def solve(grid):
     
     for i in range(lengths[1]):
         for j in range(len(d['train'][0]['input'][i])):
-            #Create a new grid to input the solution to
+            #Create a new list to input the solution to
             #extend the input grid to create a larger output grid footprint
             output_grid1 = []           
             output_grid1.extend(d['train'][i]['input'][j])
             
-            #iterate through the input grid and output to the solution grid
+            #iterate through the list and output to the solution grid
             for z in range(len(output_grid1)):
                 output_grid1.append(output_grid1[2-z])
             #print as a numpy 2D array, rather than list
@@ -39,11 +39,11 @@ def solve(grid):
     
     for i in range(lengths[0]):
         for j in range(len(d['test'][0]['input'][i])):
-            #Create a new grid to input the solution to
+            #Create a new list to input the solution to
             output_grid2 = []
             output_grid2.extend(d['test'][i]['input'][j])
             
-            #iterate through the input grid and output to the solution grid
+            #iterate through the list and output to the solution grid
             for z in range(len(output_grid2)):
                 output_grid2.append(output_grid2[2-z])
             #print as a numpy 2D array, rather than list
@@ -57,6 +57,6 @@ def main():
     input_grid = sys.argv[1]
     solve(input_grid)         #pass the input file to the solve function
     
-    
+"""Call the maiin function"""    
 if __name__ == "__main__":
    main()
