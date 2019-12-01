@@ -57,6 +57,6 @@ def main():
     input_grid = sys.argv[1]
     solve(input_grid)         #pass the input file to the solve function
     
-"""Call the maiin function"""    
+"""Call the main function"""    
 if __name__ == "__main__":
    main()

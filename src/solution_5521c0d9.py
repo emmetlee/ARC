@@ -4,7 +4,9 @@ Created on Thu Nov 28 23:28:18 2019
 
 @author: emmetlee
 """
+import sys
 import json
+import numpy as np
 
 def solve(grid):
     """Call solve() function """
@@ -16,44 +18,56 @@ def solve(grid):
     lengths2 = [lengthv for lengthv in tmpd2.values()]
 
     """Print the Output Grids for training inputs"""
-    #training grids are in lengths[0]
+    #Convert the training dict value to a numpy array
+    train_array = np.asarray(d2['train'][0]['input'])
+   
     for x in range(lengths2[0]):
-        for y in (range(len(d2['train'][0]['input']))):
+        for y in (range(len(train_array))):
             output_grid3 = []
-            if ((d2['train'][x]['input'][y])!=0):
-                output_grid3.extend(d2['train'][x]['input'][y-1])
-            else:
-                output_grid3.extend(d2['train'][x]['input'][y])
-            print(output_grid3)
+            output_grid3.extend(d2['train'][x]['output'][y])
+            #train_height = get_height(train_array)
+            #np.add(output_grid3(y), (get_height(train_array)[y]))
+                        
+            #print as a numpy 2D array, rather than list
+            
+            print(np.asarray(output_grid3))
+        print(" ")
+        
+    """ Print the Output grids for Test inputs"""
+    #Convert the test dict value to a numpy array
+    test_array = np.asarray(d2['test'][0]['input'])
+    test_height = get_height(test_array)
+
+    for x in range(lengths2[1]):
+        for y in range(len(test_array)):
+            output_grid3 = []
+            #np.add(output_grid3, (test_height))
+            output_grid3.extend(d2['test'][x]['input'][y])
+            #output_grid3[:,y]+(test_height[y])
+            #output_grid3.append(output_grid3,test_height)
+            
+            #print as a numpy 2D array, rather than list
+            #print(np.asarray(output_grid3)) 
+            
+            #if ynp.add((output_grid3[:,y],(get_height(train_array)))
+            print(np.asarray(output_grid3))
         print(" ")
 
- def get_height():
-    for x in range(lengths2[0]):
-        for y in (range(len(d2['train'][0]['input']))):
-            output_grid3 = []
-            blue = 0
-            red = 0
-            yellow = 0
-            for z in (d2['train'][x]['input'][y]):
-                if z==1:
-                    blue+=1
-                elif z==2:
-                    red+=1
-                elif z==4:
-                    yellow+=1
-    print(blue, red, yellow)
-            
+"""Function to get the height of each shape in each column of the input grid"""
+def get_height(grid):
+     #Get the height of each column in the grid
+     heights = (len(grid)) -(grid !=0).argmax(axis=0)
+     return(heights)
             
 
-
-    #z for z in (d2['train'][x]['input'][y]) 
-    
-    
 def main():
-    """Call solve() function and pass the json"""
-    output = solve("5521c0d9.json")
+    """Call solve() function and pass the json
+    Read the first command-line argument (after python script) 
+    as the input file"""
+    input_grid = sys.argv[1]
+    solve(input_grid)         #pass the input file to the solve function
+    #output = solve("5521c0d9.json")
     
-
-
-
-main()
+"""Call the main function"""    
+if __name__ == "__main__":
+   main()
